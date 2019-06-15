@@ -3,14 +3,22 @@ import { voteFor } from '../reducers/anecdoteReducer'
 import { show , hide } from '../reducers/notificationReducer'
 
 const AnecdoteList = (props) => {
-  const anecdotes = props.store.getState().anecdotes
+  const { anecdotes , filter } = props.store.getState()
+
+  const anecdotesToShow = () => {
+    if (filter === '') {
+      return anecdotes
+    }
+    
+    return anecdotes.filter(a => a.content.toLowerCase().indexOf(filter) !== -1)
+  }
 
   const vote = (id) => {
     props.store.dispatch(
       voteFor(id)
     )
 
-    const anecdote = anecdotes.find((a) => a.id === id) 
+    const anecdote = anecdotes.find((a) => a.id === id)
 
     props.store.dispatch(
       show(`you voted for '${anecdote.content}'`)
@@ -25,7 +33,7 @@ const AnecdoteList = (props) => {
 
   return (
     <div>
-      {anecdotes.map(anecdote =>
+      {anecdotesToShow().map(anecdote =>
         <div key={anecdote.id}>
           <div>
             {anecdote.content}
