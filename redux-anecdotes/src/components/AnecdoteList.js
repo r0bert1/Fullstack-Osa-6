@@ -1,5 +1,6 @@
 import React from 'react'
 import { voteFor } from '../reducers/anecdoteReducer'
+import { show , hide } from '../reducers/notificationReducer'
 
 const AnecdoteList = (props) => {
   const anecdotes = props.store.getState().anecdotes
@@ -8,6 +9,18 @@ const AnecdoteList = (props) => {
     props.store.dispatch(
       voteFor(id)
     )
+
+    const anecdote = anecdotes.find((a) => a.id === id) 
+
+    props.store.dispatch(
+      show(`you voted for '${anecdote.content}'`)
+    )
+
+    setTimeout(() => {
+      props.store.dispatch(
+        hide()
+      )
+    }, 5000);
   }
 
   return (
