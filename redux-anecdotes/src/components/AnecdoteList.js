@@ -15,20 +15,14 @@ const AnecdoteList = (props) => {
   }
 
   const vote = (id) => {
-    props.dispatch(
-      voteFor(id)
-    )
+    props.voteFor(id)
 
     const anecdote = anecdotes.find((a) => a.id === id)
 
-    props.dispatch(
-      show(`you voted for '${anecdote.content}'`)
-    )
+    props.show(`you voted for '${anecdote.content}'`)
 
     setTimeout(() => {
-      props.dispatch(
-        hide()
-      )
+      props.hide()
     }, 5000);
   }
 
@@ -57,4 +51,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(AnecdoteList)
+const mapDispatchToProps = {
+  voteFor,
+  show,
+  hide
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AnecdoteList)

@@ -4,9 +4,7 @@ import { applyFilter } from '../reducers/filterReducer'
 
 const Filter = (props) => {
   const handleChange = (event) => {
-    props.dispatch(
-      applyFilter(event.target.value.toLowerCase())
-    )
+    props.applyFilter(event.target.value.toLowerCase())
   }
   const style = {
     marginBottom: 10
@@ -19,4 +17,11 @@ const Filter = (props) => {
   )
 }
 
-export default connect()(Filter)
+const mapDispatchToProps = {
+  applyFilter
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Filter)
