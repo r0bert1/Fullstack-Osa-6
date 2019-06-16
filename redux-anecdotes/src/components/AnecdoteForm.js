@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { createNote } from '../reducers/anecdoteReducer'
 import { show , hide } from '../reducers/notificationReducer'
 
@@ -8,16 +9,16 @@ const AnecdoteForm = (props) => {
 
     const anecdote = event.target.anecdote.value
 
-    props.store.dispatch(
+    props.dispatch(
       createNote(anecdote)
     )
 
-    props.store.dispatch(
+    props.dispatch(
       show(`you added '${anecdote}'`)
     )
 
     setTimeout(() => {
-      props.store.dispatch(
+      props.dispatch(
         hide()
       )
     }, 5000);
@@ -34,4 +35,4 @@ const AnecdoteForm = (props) => {
   )
 }
 
-export default AnecdoteForm
+export default connect()(AnecdoteForm)

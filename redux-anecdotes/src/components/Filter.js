@@ -1,9 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { applyFilter } from '../reducers/filterReducer'
 
 const Filter = (props) => {
   const handleChange = (event) => {
-    props.store.dispatch(
+    props.dispatch(
       applyFilter(event.target.value.toLowerCase())
     )
   }
@@ -18,4 +19,4 @@ const Filter = (props) => {
   )
 }
 
-export default Filter
+export default connect()(Filter)
