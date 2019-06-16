@@ -1,9 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { voteFor } from '../reducers/anecdoteReducer'
 import { show , hide } from '../reducers/notificationReducer'
 
 const AnecdoteList = (props) => {
-  const { anecdotes , filter } = props.store.getState()
+  const { anecdotes , filter } = props
 
   const anecdotesToShow = () => {
     if (filter === '') {
@@ -48,4 +49,14 @@ const AnecdoteList = (props) => {
   )
 }
 
-export default AnecdoteList
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    anecdotes: state.anecdotes,
+    filter: state.filter
+  }
+}
+
+const ConnectedAnecdoteList = connect(mapStateToProps)(AnecdoteList)
+
+export default ConnectedAnecdoteList
