@@ -15,8 +15,9 @@ const reducer = (state = [], action) => {
 
     case 'NEW_ANECDOTE':
       const newAnecdote = {
-        content: action.data.content,
-        votes: 0
+        content: action.data.anecdote.content,
+        votes: 0,
+        id: action.data.anecdote.id
       }
       return [...state, newAnecdote]
     case 'INIT_ANECDOTES':
@@ -33,10 +34,10 @@ export const voteFor = (id) => {
   }
 }
 
-export const createNote = (content) => {
+export const createAnecdote = (anecdote) => {
   return {
     type: 'NEW_ANECDOTE',
-    data: { content }
+    data: { anecdote }
   }
 }
 
