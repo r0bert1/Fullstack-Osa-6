@@ -7,9 +7,9 @@ const AnecdoteList = (props) => {
   const anecdotes = props.visibleAnecdotes
 
   const vote = (id) => {
-    props.voteFor(id)
-
-    const anecdote = anecdotes.find((a) => a.id === id)
+    const anecdote = anecdotes.find(a => a.id === id)
+    const changedAnecdote = { ...anecdote, votes: anecdote.votes + 1 }
+    props.voteFor(changedAnecdote)
     props.show(`you voted for '${anecdote.content}'`)
 
     setTimeout(() => {
